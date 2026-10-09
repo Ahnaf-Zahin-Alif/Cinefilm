@@ -1,11 +1,13 @@
 import {Search} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { getMovies } from '../Hooks/getMovies';
+import MoviesModal from '../Components/MoviesModal';
 
 export default function Moviespage () {
 
     const[query , setQuery] = useState("");
     const[movies , setMovies] = useState([]);
+    const[selectedMovie , setSelectedMovie] =useState(null);
 
     useEffect(() =>{
         async function loadData() {
@@ -70,7 +72,7 @@ export default function Moviespage () {
       </div>
 
       {/* 4. See Details Button */}
-      <button className="w-full py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-white text-xs font-semibold cursor-pointer transition">
+      <button onClick={() => setSelectedMovie(movie)} className="w-full py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-white text-xs font-semibold cursor-pointer transition">
         See Details
       </button>
     </div>
@@ -85,7 +87,12 @@ export default function Moviespage () {
 
         </div>
 
-    
+    {selectedMovie && (
+  <MoviesModal 
+    movie={selectedMovie} 
+    onClose={() => setSelectedMovie(null)} 
+  />
+)}
 
     </div>
   );
