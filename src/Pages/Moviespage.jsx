@@ -11,7 +11,8 @@ export default function Moviespage () {
 
     useEffect(() =>{
         async function loadData() {
-            const data = await getMovies("batman")
+            const searchTerm = query.trim() || "batman";
+            const data = await getMovies(searchTerm);
             setMovies(data);
         }
         
@@ -42,7 +43,7 @@ export default function Moviespage () {
 
         </div>
 
-        <div className= "grid grid-cols-2 gap-6">
+        <div className= "grid grid-cols-4 gap-6">
 
 
         {movies.map((item) => {
